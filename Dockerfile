@@ -9,6 +9,4 @@ RUN apk update && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     chown -R www-data:www-data /var/lib/nginx
 
-EXPOSE 80 443
-
 CMD ["nginx", "-g", "daemon off;"]
