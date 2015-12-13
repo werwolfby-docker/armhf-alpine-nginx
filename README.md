@@ -1,6 +1,6 @@
 # armhf-alpine-nginx
 
-ARM hf compatible Docker Image with a minimal `tranmsission` daemon.
+ARM hf compatible Docker Image with a minimal `nginx` HTTP and reverse proxy server (https://nginx.org/).
 
 ## Details
 - [Source Project Page](https://github.com/werwolfby/docker-armhf-alpine-nginx)
@@ -10,11 +10,9 @@ ARM hf compatible Docker Image with a minimal `tranmsission` daemon.
 ## Start a nginx server
 ```bash
 docker run -d --name my-nginx \
-  -p 9091:9091 \
-  -p 51413:51413/tcp \
-  -p 51413:51413/udp \
-  -v /path/to/complete/folder:/root/Downloads \
-  -v /path/to/store/nginx/settings/and/intermediate/results:/etc/nginx \
+  -p 80:80 \
+  -p 443:443 \
+  -v /path/to/store/nginx/settings/:/etc/nginx \
   werwolfby/armhf-alpine-nginx
 ```
 
@@ -33,25 +31,11 @@ make build
 
 ### Run container from image
 Copy `env.template` to `env`. Edit the file settings to your particular settings.
-Specify path for downloading torrents and path for storing intermediate settings and results.
+Specify path for storing nginx settings.
 ```
-TORRENTS=/path/to/complete/folder
-SETTINGS=/path/to/store/nginx/settings/and/intermediate/results
+SETTINGS=/path/to/store/nginx/settings/
 ```
 
 ```bash
 make run
-```
-
-Stop just created nginx daemon by:
-```bash
-make stop
-```
-
-Edit file in `/path/to/store/nginx/settings/and/intermediate/results/settings.json` and specify your settings.
-At least you have to specify *rpc_user* and *rpc_password*. All other settings can be left default.
-
-Start server:
-```bash
-make start
 ```
