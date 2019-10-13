@@ -1,4 +1,4 @@
-FROM armhf/alpine
+FROM alpine
 MAINTAINER Alexander Puzynia <werwolf.by@gmail.com>
 
 RUN apk update && \
@@ -9,4 +9,4 @@ RUN apk update && \
     ln -sf /dev/stderr /var/log/nginx/error.log && \
     chown -R www-data:www-data /var/lib/nginx
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "pid /tmp/nginx.pid; daemon off;"]
